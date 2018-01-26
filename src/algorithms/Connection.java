@@ -1,4 +1,5 @@
 package algorithms;
 
-public class Connection {
+public abstract class Connection {
+    public abstract void update();
 }
