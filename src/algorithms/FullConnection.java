@@ -12,6 +12,13 @@ public class FullConnection extends Connection {
         output.addInput(this);
     }
 
+    public void setWeights(double[][] input){
+        if(input.length == weights.length && input[0].length == weights[0].length)
+            weights = input;
+        else
+            System.out.println("Error in setWeights() : wrong input size");
+    }
+
     public void update(){
         for(int i=0; i<output.neurons.length; i++){
             double sum = 0;

@@ -19,13 +19,31 @@ public class Layer {
         inputs.add(c);
     }
 
+    public void setNeurons(double[] input){
+        if(input.length == neurons.length)
+            neurons = input;
+        else
+            System.out.println("Error in setNeurons() : wrong input size");
+    }
+
+    public void setTheta(double[] input){
+        if(input.length == theta.length)
+            theta = input;
+        else
+            System.out.println("Error in setTheta() : wrong input size");
+    }
+
     public void update(){
         for(int i=0; i<neurons.length; i++)
             neurons[i] = 0;
         for(Connection c:inputs)
             c.update();
-        for(int i=0; i<neurons.length; i++)
-            neurons[i] = activation.transfert(neurons[i]+theta[i]);
+        System.out.print("Layer neurons : ");
+        for(int i=0; i<neurons.length; i++) {
+            neurons[i] = activation.transfert(neurons[i] + theta[i]);
+            System.out.print(neurons[i]+" ");
+        }
+        System.out.println("");
     }
 
 }
