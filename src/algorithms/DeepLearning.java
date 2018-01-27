@@ -24,9 +24,21 @@ public class DeepLearning implements Classifier{
         H2H3.setWeights(new double[][]{{1, -1},{0, 0.5}});
         H3out.setWeights(new double[][]{{0.4, 0.5}});
 
-        H1.update();
-        H2.update();
-        H3.update();
-        out.update();
+        H1.propagation();
+        H2.propagation();
+        H3.propagation();
+        out.propagation();
+
+        H1.setNeurons(new double[]{0.5, 0.15});
+        H2.setNeurons(new double[]{0.4, -0.1});
+        H3.setNeurons(new double[]{0.45, -0.2});
+
+        out.setGradient(new double[]{1});
+        H3.backpropagation();
+        H2.backpropagation();
+        H1.backpropagation();
+        in.backpropagation();
+
+
     }
 }

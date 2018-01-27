@@ -1,5 +1,6 @@
 package algorithms;
 
 public abstract class Connection {
-    public abstract void update();
+    public abstract void propagation();
+    public abstract void backpropagation();
 }

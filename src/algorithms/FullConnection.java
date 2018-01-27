@@ -10,6 +10,7 @@ public class FullConnection extends Connection {
         output = out;
         weights = new double[out.neurons.length][in.neurons.length];
         output.addInput(this);
+        input.addOutput(this);
     }
 
     public void setWeights(double[][] input){
@@ -19,12 +20,23 @@ public class FullConnection extends Connection {
             System.out.println("Error in setWeights() : wrong input size");
     }
 
-    public void update(){
+    @Override
+    public void propagation(){
         for(int i=0; i<output.neurons.length; i++){
             double sum = 0;
             for(int j=0; j<input.neurons.length; j++)
                 sum += input.neurons[j]*weights[i][j];
             output.neurons[i] += sum;
+        }
+    }
+
+    @Override
+    public void backpropagation() {
+        for(int i=0; i<input.gradient.length; i++){
+            double sum = 0;
+            for(int j=0; j<output.gradient.length; j++)
+                sum += output.gradient[j]*weights[j][i];
+            input.gradient[i] += sum;
         }
     }
 
