@@ -1,31 +1,18 @@
 package algorithms;
 
-import java.util.ArrayList;
-
-public class Layer {
+public class Layer extends Connection{
     double[] neurons;
     double[] theta;
     double[] gradient;
     Activation activation;
-    ArrayList<Connection> inputs;
-    ArrayList<Connection> outputs;
 
     public Layer(int nbNeurons, Activation activ){
+        super();
         neurons = new double[nbNeurons];
         theta = new double[nbNeurons];
         gradient = new double[nbNeurons];
         activation = activ;
-        inputs = new ArrayList<>();
-        outputs = new ArrayList<>();
     }
-
-    public void addInput(Connection c){
-        inputs.add(c);
-    }
-    public void addOutput(Connection c){
-        outputs.add(c);
-    }
-
 
     public void setNeurons(double[] input){
         if(input.length == neurons.length)
@@ -48,30 +35,44 @@ public class Layer {
             System.out.println("Error in setGradient() : wrong input size");
     }
 
-    public void propagation(){
-        for(int i=0; i<neurons.length; i++)
-            neurons[i] = 0;
-        for(Connection c:inputs)
-            c.propagation();
-        System.out.print("Layer neurons : ");
-        for(int i=0; i<neurons.length; i++) {
-            neurons[i] = activation.transfert(neurons[i] + theta[i]);
-            System.out.print(neurons[i]+" ");
+    public double[] propagation(){
+        if(!backprop) {
+            for (int i = 0; i < neurons.length; i++)
+                neurons[i] = 0;
+            for (Connection c : inputs) {
+                double[] values = c.propagation();
+                for (int i = 0; i < neurons.length; i++)
+                    neurons[i] += values[i];
+            }
+            System.out.print("Layer neurons : ");
+            for (int i = 0; i < neurons.length; i++) {
+                neurons[i] = activation.transfert(neurons[i] + theta[i]);
+                System.out.print(neurons[i] + " ");
+            }
+            System.out.println("");
+            backprop = true;
         }
-        System.out.println("");
+        return neurons;
     }
 
-    public void backpropagation(){
-        for(int i=0; i<gradient.length; i++)
-            gradient[i] = 0;
-        for(Connection c:outputs)
-            c.backpropagation();
-        System.out.print("Layer gradients : ");
-        for(int i=0; i<gradient.length; i++) {
-            gradient[i] = activation.derivative(neurons[i])*gradient[i];
-            System.out.print(gradient[i]+" ");
+    public double[] backpropagation(){
+        if(backprop) {
+            for (int i = 0; i < gradient.length; i++)
+                gradient[i] = 0;
+            for (Connection c : outputs) {
+                double[] values = c.backpropagation();
+                for (int i = 0; i < values.length; i++)
+                    gradient[i] += values[i];
+            }
+            System.out.print("Layer gradient : ");
+            for (int i = 0; i < neurons.length; i++) {
+                gradient[i] = activation.derivative(neurons[i])*gradient[i];
+                System.out.print(gradient[i] + " ");
+            }
+            System.out.println("");
+            backprop = false;
         }
-        System.out.println("");
+        return gradient;
     }
 
 }
