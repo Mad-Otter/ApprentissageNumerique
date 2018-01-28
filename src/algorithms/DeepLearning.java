@@ -30,7 +30,8 @@ public class DeepLearning implements Classifier{
         H2.setNeurons(new double[]{0.4, -0.1});
         H3.setNeurons(new double[]{0.45, -0.2});
 
-        out.setGradient(new double[]{1});
+        //out.setGradient(new double[]{1});
+        out.setGradient(out.calculGradient(out.neurons, new double[] {-0.65}));
         in.backpropagation();
     }
 }
