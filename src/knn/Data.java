@@ -1,3 +1,5 @@
+package knn;
+
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;

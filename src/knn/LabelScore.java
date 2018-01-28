@@ -1,3 +1,5 @@
+package knn;
+
 public class LabelScore implements Comparable<LabelScore> {
     private String label;
     private int score;

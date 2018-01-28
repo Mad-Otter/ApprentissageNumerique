@@ -1,3 +1,5 @@
+package knn;
+
 public class ElementDistance implements Comparable<ElementDistance> {
     private Element element;
     private float distance;

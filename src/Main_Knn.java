@@ -1,10 +1,10 @@
 import java.util.ArrayList;
+import knn.*;
 
-public class Main {
+public class Main_Knn {
     public static void main(String[] args) {
         Data all = new Data("iris.data.txt");
         ArrayList<Data> bases = all.divide(5);
-
 
         for (int K = 3; K <= 8; K++) {
             int scoreGood = 0;

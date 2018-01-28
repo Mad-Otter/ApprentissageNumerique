@@ -1,3 +1,5 @@
+package knn;
+
 public class Element {
     private float[] vector;
     private String label;
