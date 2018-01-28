@@ -74,5 +74,18 @@ public class Layer extends Connection{
         }
         return gradient;
     }
+    
+     public double[] calculGradient(double[] output, double[] target) {
+    	if(output.length != target.length) {
+    		System.out.println("Error in calculGradient() : wrong size");
+    		return null;
+    	}
+    	double[] grd = new double[output.length];
+    	for(int i=0;i<grd.length;i++) {
+    		grd[i]=output[i]-target[i];
+    	}
+    	
+    	return grd;   	
+    }
 
 }
