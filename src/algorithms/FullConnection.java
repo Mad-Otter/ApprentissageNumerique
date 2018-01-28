@@ -54,4 +54,12 @@ public class FullConnection extends Connection {
         }
         return gradients;
     }
+    
+       public void initWeights() {
+	   for(int i=0;i<weights.length;i++) {
+		   for(int j=0;j<weights[0].length;j++) {
+			   weights[i][j]=(Math.random()*2)-1;
+		   }
+	   }
+   }
 }
