@@ -1,6 +1,6 @@
-package knn;
+package data;
 
-public class ElementDistance implements Comparable<ElementDistance> {
+public class ElementDistance implements Comparable<ElementDistance>, Data {
     private Element element;
     private float distance;
 
