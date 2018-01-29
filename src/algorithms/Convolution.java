@@ -33,8 +33,8 @@ public class Convolution extends Connection {
                 double sum = 0;
                 for (Connection in : inputs) {
                     double[] values = in.propagation();
-                    for (int j = i; j < size; j++)
-                        sum += values[i % (filterSize)] * weights[i / filterSize][j];
+                    for (int j = 0; j < size; j++)
+                        sum += values[(i%filterSize + j) % values.length] * weights[i / filterSize][j];
                 }
                 activations[i] = sum;
             }
@@ -52,7 +52,8 @@ public class Convolution extends Connection {
                 for (Connection out : outputs) {
                     double[] values = out.backpropagation();
                     for (int j = 0; j < nbFilters; j++)
-                        sum += values[i % filterSize] * weights[i][j];
+                        for(int k = 0; k < size; k++)
+                            if(i-k >= 0 && i-k <= filterSize) sum += values[i-k] * weights[j][k];
                 }
                 gradients[i] = sum;
             }

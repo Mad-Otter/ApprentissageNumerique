@@ -1,5 +1,8 @@
 package algorithms;
 
+import data.Data;
+import data.Element;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -34,5 +37,10 @@ public class MultiLayerPerceptron implements Classifier{
 	public void initNeurons(String url) {
 
 	}
-  }
+
+	@Override
+	public String getConsensus(Data data, Element element) {
+		return null;
+	}
+}
 
