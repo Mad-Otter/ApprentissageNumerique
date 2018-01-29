@@ -5,15 +5,13 @@ import java.util.PriorityQueue;
 import java.awt.*;
 import java.io.*;
 
-public class Iris implements Data {
-	private ArrayList<Element> elements;
-
+public class Iris extends Data {
     public Iris() {
-        elements = new ArrayList<>();
+        super();
     }
 
     public Iris(String url) {
-        elements = new ArrayList<>();
+        super();
 
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(url))));
@@ -78,38 +76,5 @@ public class Iris implements Data {
         }
 
         return knn;
-    }
-
-    public void addElement(Element e) {
-        elements.add(e);
-    }
-
-    public Element getElement(int i) {
-        return elements.get(i);
-    }
-
-    public ArrayList<Iris> divide(int no) {
-        ArrayList<Iris> res = new ArrayList<>();
-
-        for (int i = 0; i < no; i++) {
-            res.add(new Iris());
-        }
-
-        for (int i = 0; i < elements.size(); i++) {
-            res.get(i % no).addElement(elements.get(i));
-        }
-
-        return res;
-    }
-
-    public int size() {
-        return elements.size();
-    }
-
-    public void trace() {
-        System.out.println("Base de " + size() + " elements");
-        for (Element e : elements) {
-            System.out.println(e);
-        }
     }
 }

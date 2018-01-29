@@ -1,6 +1,6 @@
 package data;
 
-public class ElementDistance implements Comparable<ElementDistance>, Data {
+public class ElementDistance implements Comparable<ElementDistance> {
     private Element element;
     private float distance;
 

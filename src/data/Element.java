@@ -70,4 +70,17 @@ public class Element {
 
         return sb.toString();
     }
+
+    public String toGinnetLine() {
+        StringBuilder sb = new StringBuilder("");
+
+        for (int i = 0; i < vector.length; i++) {
+            sb.append(vector[i]);
+            sb.append(",");
+        }
+
+        sb.append(label);
+
+        return sb.toString();
+    }
 }
