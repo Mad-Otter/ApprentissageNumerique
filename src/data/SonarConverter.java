@@ -6,7 +6,10 @@ import java.awt.*;
 import java.io.*;
 
 public class SonarConverter extends Data {
-
+    public SonarConverter() {
+        super();
+    }
+    
     public SonarConverter(String url, String startSymbol) {
         elements = new ArrayList<>();
 
