@@ -6,23 +6,28 @@ import data.*;
 public class CrossValidation {
 
     public void test(Classifier classifier, Data data) {
-    	ArrayList<Data> bases = data.divide(5);
+        int nb_sections = 5;
+        int moy = 0;
 
-	    int scoreGood = 0;
-        int scoreBad = 0;
+        for (int no_test_section = 0; no_test_section < 5; no_test_section++) {
+            Data train = data.getTrainData(nb_sections, no_test_section);
+            Data test = data.getTestData(nb_sections, no_test_section);
 
-        for (int i = 0; i < bases.get(0).size(); i++) {
-            Element el = bases.get(0).getElement(i);
+            int good = 0;
+            int bad = 0;
 
-            for (int b = 1; b < 5; b++) {
-                if (classifier.getConsensus(bases.get(1), el).equals(el.getLabel())) {
-                    scoreGood++;
+            for (int i = 0; i < test.size(); i++) {
+                if (classifier.getConsensus(train, test.getElement(i)).equals(test.getElement(i).getLabel())) {
+                    good++;
                 } else {
-                    scoreBad++;
+                    bad++;
                 }
             }
+
+            System.out.println("- Test sur la partie (" + (no_test_section + 1) + "/" + nb_sections + "), bon résultats : " + good + "/" + (good + bad) + " (" + ((int)((good * 100.0) / (good + bad))) + "%)");
+            moy += ((int)((good * 100.0) / (good + bad)));
         }
 
-        System.out.println("Bon résultats : " + scoreGood + "/" + (scoreGood+scoreBad) + " (" + ((int)((scoreGood*100.0)/(scoreGood+scoreBad))) + "%)");
+        System.out.println("Moyenne : " + ((int) (moy / nb_sections)) + "% de bonnes réponses.");
     }
 }

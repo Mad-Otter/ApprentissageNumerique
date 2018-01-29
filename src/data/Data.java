@@ -41,4 +41,29 @@ public abstract class Data {
             System.out.println(e);
         }
     }
+
+    public void appendData(Data d) {
+        for (int i = 0; i < d.size(); i++) {
+            addElement(d.getElement(i));
+        }
+    }
+
+    public Data getTrainData(int noSections, int noTestSection) {
+        ArrayList<Data> sections = divide(noSections);
+        Data res = new Iris();
+
+        for (int i = 0; i < noSections; i++) {
+            if (i != noTestSection) {
+                res.appendData(sections.get(i));
+            }
+        }
+
+        return res;
+    }
+
+    public Data getTestData(int noSections, int noTestSection) {
+        ArrayList<Data> sections = divide(noSections);
+        
+        return sections.get(noTestSection);
+    }
 }
