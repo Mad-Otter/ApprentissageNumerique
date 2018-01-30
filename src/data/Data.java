@@ -73,4 +73,8 @@ public abstract class Data {
     public boolean equals(Object o){
         return (o instanceof Data && ((Data)o).elements.equals(this.elements));
     }
+
+    public Element getRandomElement() {
+        return elements.get((int)Math.random()*elements.size());
+    }
 }

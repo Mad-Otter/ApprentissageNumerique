@@ -20,6 +20,8 @@ public class Element {
         this.label = label;
     }
 
+    public void setLabel(String label){this.label = label;}
+
     public String getLabel() {
         return label;
     }
@@ -31,6 +33,10 @@ public class Element {
     public float getVectorValue(int i) {
         return vector[i];
     }
+
+    public void addValueToVector(int i, float mod){vector[i] += mod;}
+
+    public int getVectorSize(){return vector.length;}
 
     public float getManhattanDistance(Element e) {
         float d = 0;
