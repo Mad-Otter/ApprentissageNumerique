@@ -27,6 +27,12 @@ public abstract class Connection {
         }
     }
 
+    public void reset(){
+        backprop = false;
+        for(Connection in: inputs)
+            in.reset();
+    }
+
     public abstract double[] propagation();
     public abstract double[] backpropagation();
 }

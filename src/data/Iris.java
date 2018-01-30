@@ -10,6 +10,13 @@ public class Iris extends Data {
         super();
     }
 
+    @Override
+    public ArrayList<String> getLabels() {
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("Iris"); //TODO : put the labels
+        return labels;
+    }
+
     public Iris(String url) {
         super();
 

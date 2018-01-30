@@ -4,30 +4,58 @@ import data.Data;
 import data.Element;
 
 public class DeepLearning implements Classifier{
+    InputLayer in;
+    OutputLayer out;
+    Layer C1, C2, H1, H2, H3;
+    Convolution inC1, C1C2;
+    FullConnection C2H1, H1H2, H2H3, H3out, sharedWeight;
+
+    Data trainingData;
+
     public DeepLearning(){
-        Layer in = new InputLayer(3);
-        Layer C1 = new Layer(4, new Activation.reLu());
-        Layer out = new OutputLayer(1, new Activation.reLu());
+        in = new InputLayer(4);
+        C1 = new Layer(6, new Activation.reLu());
+        C2 = new Layer(4, new Activation.reLu());
+        H1 = new Layer(2, new Activation.reLu());
+        H2 = new Layer(2, new Activation.reLu());
+        H3 = new Layer(2, new Activation.tanh());
+        out = new OutputLayer(3);
 
-        Convolution inC1 = new Convolution(in, C1, 2, 2);
-        FullConnection C1out = new FullConnection(C1, out);
+        inC1 = new Convolution(in, C1, 2, 2);
+        C1C2 = new Convolution(C1, C2, 2, 2);
+        C2H1 = new FullConnection(C2, H1);
+        H1H2 = new FullConnection(H1, H2);
+        H2H3 = new FullConnection(H2, H3);
+        H3out = new FullConnection(H3, out);
 
-        in.setNeurons(new double[]{3, 2, 1});
-        C1.setTheta(new double[]{0, 0, 0, 0});
+        sharedWeight = new FullConnection(in, H1);
+        sharedWeight.addOutput(H2);
+        sharedWeight.addOutput(H3);
 
-        inC1.setWeights(new double[][]{{1, 1},{2, 2}});
-        C1out.setWeights(new double[][]{{1,1,1,1}});
+        trainingData = null;
 
-        out.propagation();
-
-
-        out.setGradient(new double[]{1});
-        //out.setGradient(out.calculGradient(out.neurons, new double[] {1}));
-        in.backpropagation();
     }
 
     @Override
     public String getConsensus(Data data, Element element) {
+        if (!data.equals(trainingData))
+            train(data);
+        in.setNeurons(element);
+        out.propagation();
+
+        out.reset();
         return null;
+    }
+
+    private void train(Data data) {
+        out.setClasses(data.getLabels());
+
+
+        out.propagation();
+
+        out.setGradient(new double[]{1});
+        //out.setGradient(out.calculGradient(out.neurons, new double[] {1}));
+        in.backpropagation();
+
     }
 }

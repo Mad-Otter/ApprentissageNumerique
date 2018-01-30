@@ -48,6 +48,8 @@ public abstract class Data {
         }
     }
 
+    public abstract ArrayList<String> getLabels();
+
     public Data getTrainData(int noSections, int noTestSection) {
         ArrayList<Data> sections = divide(noSections);
         Data res = new Iris();
@@ -65,5 +67,10 @@ public abstract class Data {
         ArrayList<Data> sections = divide(noSections);
         
         return sections.get(noTestSection);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        return (o instanceof Data && ((Data)o).elements.equals(this.elements));
     }
 }

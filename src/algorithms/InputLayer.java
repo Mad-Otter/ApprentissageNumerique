@@ -1,5 +1,7 @@
 package algorithms;
 
+import data.Element;
+
 public class InputLayer extends Layer{
 
     public InputLayer(int nbNeurons) {
@@ -14,5 +16,10 @@ public class InputLayer extends Layer{
         for (Connection c : outputs)
             c.backpropagation();
         return null;
+    }
+
+    public void setNeurons(Element element) {
+        for(int i=0; i<neurons.length; i++)
+            neurons[i] = element.getVectorValue(i);
     }
 }

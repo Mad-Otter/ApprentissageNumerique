@@ -9,7 +9,12 @@ public class SonarConverter extends Data {
     public SonarConverter() {
         super();
     }
-    
+
+    @Override
+    public ArrayList<String> getLabels() {
+        return null;
+    }
+
     public SonarConverter(String url, String startSymbol) {
         elements = new ArrayList<>();
 

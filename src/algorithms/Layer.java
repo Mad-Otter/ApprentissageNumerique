@@ -1,5 +1,7 @@
 package algorithms;
 
+import data.Element;
+
 public class Layer extends Connection{
     double[] neurons;
     double[] theta;
@@ -87,5 +89,4 @@ public class Layer extends Connection{
     	
     	return grd;   	
     }
-
 }
