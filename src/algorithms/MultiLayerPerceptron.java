@@ -18,7 +18,7 @@ public class MultiLayerPerceptron implements Classifier{
 	
 	public MultiLayerPerceptron(int nbNeurons){
 		in = new InputLayer(240);
-		out = new OutputLayer(39, new Activation.tanh());
+		out = new OutputLayer(39);
 		Layer H = new Layer(nbNeurons, new Activation.tanh());
 		
 		input = new double[240];

@@ -49,6 +49,8 @@ public class FullConnection extends Connection {
                         sum += values[j] * weights[j][i];
                 }
                 gradients[i] = sum;
+                for(int j=0; j<weights[0].length; j++)
+                    weights[i][j] -= activations[j]*gradients[i]*Epsilon.e;
             }
             backprop = false;
         }

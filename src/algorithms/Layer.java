@@ -70,6 +70,7 @@ public class Layer extends Connection{
             for (int i = 0; i < neurons.length; i++) {
                 gradient[i] = activation.derivative(neurons[i])*gradient[i];
                 System.out.print(gradient[i] + " ");
+                theta[i] -= gradient[i]*Epsilon.e;
             }
             System.out.println("");
             backprop = false;

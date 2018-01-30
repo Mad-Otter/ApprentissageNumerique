@@ -3,7 +3,8 @@ package algorithms;
 import data.Data;
 import data.Element;
 
-public class DeepLearning implements Classifier{
+
+public class IRIS_NN implements Classifier{
     InputLayer in;
     OutputLayer out;
     Layer C1, C2, H1, H2, H3;
@@ -12,7 +13,7 @@ public class DeepLearning implements Classifier{
 
     Data trainingData;
 
-    public DeepLearning(){
+    public IRIS_NN(){
         in = new InputLayer(4);
         C1 = new Layer(6, new Activation.reLu());
         C2 = new Layer(4, new Activation.reLu());
