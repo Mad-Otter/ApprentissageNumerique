@@ -1,0 +1,11 @@
+package algorithms;
+
+public class Main_MLP {
+
+	public static void main(String[] args) {
+		 
+		MultiLayerPerceptron mlp = new MultiLayerPerceptron();
+		 mlp.execute(100);
+	}
+
+}
