@@ -50,12 +50,12 @@ public abstract class Data {
 
     public abstract ArrayList<String> getLabels();
 
-    public Data getTrainData(int noSections, int noTestSection) {
+    public Data getTrainData(int noSections, int noTestSection, int noValidationSection) {
         ArrayList<Data> sections = divide(noSections);
         Data res = new Iris();
 
         for (int i = 0; i < noSections; i++) {
-            if (i != noTestSection) {
+            if (i != noTestSection && i != noValidationSection) {
                 res.appendData(sections.get(i));
             }
         }
@@ -67,6 +67,12 @@ public abstract class Data {
         ArrayList<Data> sections = divide(noSections);
         
         return sections.get(noTestSection);
+    }
+
+    public Data getValidationData(int noSections, int noValidationSection) {
+        ArrayList<Data> sections = divide(noSections);
+        
+        return sections.get(noValidationSection);
     }
 
     @Override
