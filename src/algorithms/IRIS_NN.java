@@ -64,7 +64,7 @@ public class IRIS_NN implements Classifier{
         out.propagation();
         out.reset();
         String pred = out.predict();
-        System.out.println(pred);
+        //System.out.println(pred);
         return pred;
     }
 
@@ -72,7 +72,7 @@ public class IRIS_NN implements Classifier{
         out.setClasses(data.getLabels());
         for(Connection c: allLayers)
             c.init();
-        for (int k = 0; k < 10000; k++) { // TODO early stopping
+        for (int k = 0; k < 1000; k++) { // TODO early stopping
             Element element = data.getRandomElement();
             Epsilon.update(k);
             in.setNeurons(element);
