@@ -33,6 +33,9 @@ public abstract class Connection {
             in.reset();
     }
 
+    public abstract void init();
+    public abstract String toString();
+
     public abstract double[] propagation();
     public abstract double[] backpropagation();
 }

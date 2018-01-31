@@ -13,7 +13,9 @@ public class Iris extends Data {
     @Override
     public ArrayList<String> getLabels() {
         ArrayList<String> labels = new ArrayList<String>();
-        labels.add("Iris"); //TODO : put the labels
+        labels.add("Iris-setosa");
+        labels.add("Iris-versicolor");
+        labels.add("Iris-virginica");
         return labels;
     }
 

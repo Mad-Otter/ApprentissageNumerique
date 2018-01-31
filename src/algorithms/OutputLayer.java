@@ -37,4 +37,15 @@ public class OutputLayer extends Layer{
             neurons[i] = neurons[i] / sum;
         }
     }
+
+    public void calculGradient(String label) {
+        if(predict() != label) {
+            for (int i = 0; i < classes.size(); i++) {
+                if (classes.get(i) == label)
+                    gradient[i] = 1 - neurons[i];
+                else
+                    gradient[i] = 0 - neurons[i];
+            }
+        }
+    }
 }

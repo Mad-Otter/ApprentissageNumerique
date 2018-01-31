@@ -29,8 +29,8 @@ public class MultiLayerPerceptron implements Classifier{
 		FullConnection inH = new FullConnection(in, H);
 		FullConnection Hout = new FullConnection(H, out);
 		
-		inH.initWeights();
-		Hout.initWeights();
+		inH.init();
+		Hout.init();
 				
 	}
   

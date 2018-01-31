@@ -26,6 +26,25 @@ public class Convolution extends Connection {
     }
 
     @Override
+    public void init() {
+        for (int i = 0; i < weights.length; i++) {
+            for (int j = 0; j < weights[0].length; j++) {
+                weights[i][j] = (Math.random() * 2) - 1;
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (double[] d : weights)
+            for (double d2 : d)
+                s += " " + d2;
+            s += "/";
+        return s;
+    }
+
+    @Override
     public double[] propagation() {
         if (!backprop) {
             int filterSize = activations.length / nbFilters;
@@ -34,7 +53,7 @@ public class Convolution extends Connection {
                 for (Connection in : inputs) {
                     double[] values = in.propagation();
                     for (int j = 0; j < size; j++)
-                        sum += values[(i%filterSize + j) % values.length] * weights[i / filterSize][j];
+                        sum += values[(i % filterSize + j) % values.length] * weights[i / filterSize][j];
                 }
                 activations[i] = sum;
             }
@@ -52,21 +71,13 @@ public class Convolution extends Connection {
                 for (Connection out : outputs) {
                     double[] values = out.backpropagation();
                     for (int j = 0; j < nbFilters; j++)
-                        for(int k = 0; k < size; k++)
-                            if(i-k >= 0 && i-k <= filterSize) sum += values[i-k] * weights[j][k];
+                        for (int k = 0; k < size; k++)
+                            if (i - k >= 0 && i - k <= filterSize) sum += values[i - k] * weights[j][k];
                 }
                 gradients[i] = sum;
             }
             backprop = false;
         }
         return gradients;
-    }
-
-    public void initWeights() {
-        for (int i = 0; i < weights.length; i++) {
-            for (int j = 0; j < weights[0].length; j++) {
-                weights[i][j] = (Math.random() * 2) - 1;
-            }
-        }
     }
 }
